@@ -1,0 +1,10 @@
+pandas>=1.5
+numpy>=1.23
+openpyxl
+scikit-learn
+networkx
+gensim==4.3.0
+torch>=1.10
+torchkge>=0.17.7
+matplotlib
+tqdm
