@@ -16,7 +16,7 @@ Experiments on a real-world dataset from a seminconductor demonstrate that DeCo 
 ## Experiments
 The example of running the task assignment is as follows:
 ```bash
-python deco_main.py --structure global --lambda_weight 0.5
+python deco_assignment.py --structure global --lambda_weight 0.5
 ```
 Note that due to dataset privacy, we only release the main part of the assignment module in our model. We are currently organizing and cleaning up the releasable parts of the implementation.
 
