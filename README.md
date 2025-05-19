@@ -1,70 +1,38 @@
-## DECO Overview
-This repository provides several **task‑to‑engineer assignment baselines** plus our proposed **DECO** model.  
-All methods simulate daily dispatch of CQC tickets, write their results to _Excel_ files, and are scored by a unified evaluator.
-
----
+## DeCo: Defect-Aware Modeling with Contrasting Matching for Optimizing Task Assignment in Online IC Testing (IJCAI 2025)
 
 
+The **DeCo** framework (**De**fect-Aware Modeling with **Co**ntrasting Matching for Optimizing Task Assignment in Online IC Testing) leverages graph-based learning to improve IC testing task assignment. 
 
-This file is required by `embedding.py` to construct the task graph for DeepWalk and knowledge graph embeddings.
 
----
+## Abstract
 
-## Execution Flow
+In the semiconductor industry, integrated circuit (IC) processes play a vital role, as the rising complexity and market expectations necessitate improvements in yield. Identifying IC defects and assigning IC testing tasks to the right engineers improves efficiency and reduces losses. 
 
-### I. Embedding Generation
+We propose DeCo, an innovative approach for optimizing task assignment in IC testing. DeCo constructs a novel defect-aware graph from IC testing reports, capturing co-failure relationships to enhance defect differentiation. Additionally, it formulates defect-aware representations for engineers and tasks, reinforced by local and global structure modeling on the defect-aware graph. Finally, a contrasting-based assignment mechanism pairs testing tasks with QA engineers by considering their skill level and current workload.
 
-To generate node embeddings and knowledge graph triplets, run the following command from the project root:
+Experiments on a real-world dataset from a seminconductor demonstrate that DeCo achieves the highest task-handling success rates in different scenarios, while also maintaining balanced workloads on both scarce or expanded defect data.
 
+
+## Experiments
+The example of running the task assignment is as follows:
 ```bash
-python embedding.py
+python deco_main.py --structure global --lambda_weight 0.5
+```
+Note that due to dataset privacy, we only release the main part of the assignment module in our model. We are currently organizing and cleaning up the releasable parts of the implementation.
+
+## Citations
+
+```
+@article{ting2025deco,
+  title={DeCo: Defect-Aware Modeling with Contrasting Matching for Optimizing Task Assignment in Online IC Testing},
+  author={Ting, Lo Pang-Yun and Chiang, Yu-Hao and Tsai, Yi-Tung and Lai, Hsu-Chao and Chuang, Kun-Ta},
+  journal={arXiv preprint arXiv:2505.00278},
+  year={2025}
+}
 ```
 
 
-
-### II. Task Assignment Simulation
-
-Once the embeddings have been generated, run the assignment simulation with:
-
-```bash
-python deco_main.py --structure both   --lambda_weight 0.4
-```
-
-
----
-
-### III. Evaluation
-
-Evaluate every spreadsheet in a folder (default `results_xlsx/`):
-
-```bash
-python evaluation.py
-```
-
-The evaluator reports:
-- Success Rate: % tasks completed on time
-- Diversity: Std‑dev of fail‑mech distribution per engineer
-- Workload Balance: Avg & std‑dev of workload ratio
-
-Results are saved to `evaluatate_results/`.
-
----
-
-## Models
-
-- `deco.py`
-Our full proposed model. Combines local (DeepWalk-based) and global (HolE-based) structural modeling on the defect-aware graph to encode test-fail relationships. Uses contrastive assignment refined by workload and expertise.
-
----
-
-## Quick Start
-
-```bash
-pip3 install -r requirement.txt
-
-# Optional embedding pre‑training
-python embedding.py 
-
-# Run the full DECO model
-python deco.py  --structure both --lambda_weight 0.4
-```
+## Contributors
+This codebase is co-developed with the following members from [NetDB](https://ncku-ccs.github.io/netdb-web/), NCKU
+- [Yu-Hao Chiang](https://github.com/Hunk0724)
+- [Yi-Tung Tsai]()
